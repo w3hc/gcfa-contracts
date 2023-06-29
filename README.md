@@ -51,6 +51,17 @@ npx hardhat run scripts/deploy.ts --network alfajores
 
 Alfajores: 
 
+*June 15, 2023*
+
+- EURMock: [0x6bd981edf241d252b48af662a52e9d3ca84cdfae](https://alfajores.celoscan.io/address/0x6bd981edf241d252b48af662a52e9d3ca84cdfae#code)
+- IdentityMock: [0x4A5C7e56a2e2E6641934522885e843e1dc98fC1f](https://alfajores.celoscan.io/address/0x4A5C7e56a2e2E6641934522885e843e1dc98fC1f#code)
+- NameServiceMock: [0xAbf302bbe78f3e285dA4a7278DE428Caca96A873](https://alfajores.celoscan.io/address/0xAbf302bbe78f3e285dA4a7278DE428Caca96A873#code)
+- gCFA: [0x868cD4404e990746C07E99Eeb7328F2e8B09fa4C](https://alfajores.celoscan.io/address/0x868cD4404e990746C07E99Eeb7328F2e8B09fa4C#code)
+
+1st successful deposit: [0x7a311b27ce78e6e235a2c159e7fbcfbcc636b410374ac4204fa8029454bf3dec](https://alfajores.celoscan.io/tx/0x7a311b27ce78e6e235a2c159e7fbcfbcc636b410374ac4204fa8029454bf3dec)
+
+*May 18, 2023*
+
 - [EURMock](https://alfajores.celoscan.io/address/0x6Bd981edF241d252b48aF662A52E9d3cA84cdFae#code)
 - [gCFA](https://alfajores.celoscan.io/address/0xEc12e5d24f3488C8cC22381caa1cECe12a5C254f#code)
 - [DAO](https://alfajores.celoscan.io/address/0x020b796c418c363be5517c6febff5c5a9248f763#code)
@@ -69,7 +80,7 @@ Gnosis Chain:
 
 ## Versions
 
-- Node [v18.15.0](https://nodejs.org/uk/blog/release/v18.15.0/)
+- Node [v18.16.0](https://nodejs.org/uk/blog/release/v18.16.0/)
 - NPM [v9.5.0](https://github.com/npm/cli/releases/tag/v9.5.0)
 - OpenZeppelin Contracts [v4.8.0](https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v4.8.0)
 

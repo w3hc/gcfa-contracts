@@ -11,11 +11,19 @@ import "./ERC20Wrapper.sol";
  * Users can withdraw gCFA and receive a matching number of Euro stablecoin.
  */
 contract gCFA is ERC20Wrapper {
-    constructor(
-        IERC20 wrappedToken,
-        address recoveryAddress,
-        uint256 rate
-    ) ERC20Wrapper("Good CFA", "gCFA", wrappedToken, recoveryAddress, rate) {
-        return;
-    }
+	constructor(
+		IERC20 wrappedToken,
+		address recoveryAddress,
+		uint256 rate,
+		INameService nameService
+	)
+		ERC20Wrapper(
+			"Good CFA",
+			"gCFA",
+			wrappedToken,
+			recoveryAddress,
+			rate,
+			nameService
+		)
+	{}
 }

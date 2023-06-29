@@ -2,6 +2,7 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { parseEther } from "ethers/lib/utils";
+import { getRandomAddress } from "./helpers";
 
 describe("gCFA", function () {
   async function deployContractsFixture() {
@@ -13,8 +14,18 @@ describe("gCFA", function () {
 
     const rate = 655957;
 
+    const IdentityMock = await ethers.getContractFactory("IdentityMock");
+    const identity = await IdentityMock.deploy();
+    await identity.deployed();
+
+    await identity.addWhitelisted(alice.address);
+
+    const NameServiceMock = await ethers.getContractFactory("NameServiceMock");
+    const nameService = await NameServiceMock.deploy(identity.address);
+    await nameService.deployed();
+
     const gCFA = await ethers.getContractFactory("gCFA");
-    const cfa = await gCFA.deploy(eur.address, recovery.address, rate);
+    const cfa = await gCFA.deploy(eur.address, recovery.address, rate, nameService.address);
     await cfa.deployed();
 
     return { cfa, eur, alice, bob, recovery, rate };
@@ -149,6 +160,24 @@ describe("gCFA", function () {
       expect(await cfa.recoverCFA());
       expect(await cfa.balanceOf(cfa.address)).to.equal(parseEther("0"));
       expect(await eur.balanceOf(recovery.address)).to.equal(1000);
+    });
+
+    xit("Should set Name Service for deployer", async function () {
+      const { cfa, recovery } = await loadFixture(deployContractsFixture);
+      const nameServiceBefore = await cfa.nameService();
+      const randomAddress = getRandomAddress();
+      expect(await cfa.connect(recovery).setNameService(randomAddress)).to.not.be.reverted;
+      const nameServiceAfter = await cfa.nameService();
+      expect(nameServiceAfter).to.not.equal(nameServiceBefore);
+    });
+
+    xit("Should not set Name Service for not deployer", async function () {
+      const { cfa, alice } = await loadFixture(deployContractsFixture);
+      const nameServiceBefore = await cfa.nameService();
+      const randomAddress = getRandomAddress();
+      expect(cfa.connect(alice).setNameService(randomAddress)).to.be.revertedWith("Requires a community vote");
+      const nameServiceAfter = await cfa.nameService();
+      expect(nameServiceAfter).to.equal(nameServiceBefore);
     });
   });
 });
